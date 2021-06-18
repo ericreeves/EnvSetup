@@ -108,14 +108,15 @@ $Apps = @(
     "nuget.commandline",
     "beyondcompare",
     "filezilla",
-    "lightshot.install",
     "microsoft-teams.install",
     "motrix",
     "github-desktop",
     "irfanview",
     "nodejs-lts",
     "azure-cli",
-    "powershell-core")
+    "powershell-core",
+    "chocolateygui",
+    "obs-studio")
 
 foreach ($app in $Apps) {
     choco install $app -y
