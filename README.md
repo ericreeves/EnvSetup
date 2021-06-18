@@ -4,7 +4,7 @@ This is the script for Edi Wang to setup a new dev box. You can modify the scrip
 
 ## Prerequisites
 
-- A clean install of Windows 10 Pro v2004 en-us.
+- A clean install of Windows 10 Pro v2004 en-us or above.
 - If you are in China: a stable "Internet" connection.
 
 > This script has not been tested on other version of Windows, please be careful if you are using it on other Windows versions.
@@ -59,6 +59,8 @@ Import "Add_PS1_Run_as_administrator.reg" to your registry to enable context men
     - Azure CLI
     - IrfanView
     - PowerShell 7
+    - Chocolatey GUI
+    - OBS
 - Remove a few pre-installed UWP applications
     - Messaging
     - CandyCrush
