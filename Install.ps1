@@ -122,6 +122,20 @@ foreach ($app in $Apps) {
     choco install $app -y
 }
 
+Write-Host "Setting up Git for Windows..." -ForegroundColor Green
+Write-Host "------------------------------------" -ForegroundColor Green
+git config --global user.email "edi.wang@outlook.com"
+git config --global user.name "Edi Wang"
+git config --global core.autocrlf true
+
+Write-Host "Setting up dotnet for Windows..." -ForegroundColor Green
+Write-Host "------------------------------------" -ForegroundColor Green
+[Environment]::SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Development", "Machine")
+[Environment]::SetEnvironmentVariable("DOTNET_PRINT_TELEMETRY_MESSAGE", "false", "Machine")
+[Environment]::SetEnvironmentVariable("DOTNET_CLI_TELEMETRY_OPTOUT", "1", "Machine")
+dotnet tool install --global dotnet-ef
+dotnet tool update --global dotnet-ef
+
 Write-Host "------------------------------------" -ForegroundColor Green
 Read-Host -Prompt "Setup is done, restart is needed, press [ENTER] to restart computer."
 Restart-Computer
