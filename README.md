@@ -9,10 +9,13 @@ This is the script for Edi Wang to setup a new dev box. You can modify the scrip
 
 > This script has not been tested on other version of Windows, please be careful if you are using it on other Windows versions.
 
-## How to Use
+## One-key install
 
-Download latest script here: https://raw.githubusercontent.com/EdiWang/EnvSetup/master/Install.ps1
+Open Windows PowerShell(Admin)
 
+```powershell
+iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/EdiWang/EnvSetup/master/Install.ps1'))
+```
 ### Optional
 
 Import "Add_PS1_Run_as_administrator.reg" to your registry to enable context menu on the powershell files to run as Administrator.
