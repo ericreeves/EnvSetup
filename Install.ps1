@@ -136,10 +136,18 @@ Write-Host "------------------------------------" -ForegroundColor Green
 dotnet tool install --global dotnet-ef
 dotnet tool update --global dotnet-ef
 
-Write-Host "Enabling Chinese input method..." -ForegroundColor Yellow
+Write-Host "Enabling Chinese input method..." -ForegroundColor Green
 $LanguageList = Get-WinUserLanguageList
 $LanguageList.Add("zh-CN")
 Set-WinUserLanguageList $LanguageList -Force
+
+Write-Host "Applying file explorer settings..." -ForegroundColor Green
+cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v HideFileExt /t REG_DWORD /d 0 /f"
+cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v AutoCheckSelect /t REG_DWORD /d 0 /f"
+cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v LaunchTo /t REG_DWORD /d 1 /f"
+
+Write-Host "Setting Time zone..." -ForegroundColor Green
+Set-TimeZone -Name "China Standard Time"
 
 Write-Host "Installing Github.com/microsoft/artifacts-credprovider..." -ForegroundColor Green
 iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/microsoft/artifacts-credprovider/master/helpers/installcredprovider.ps1'))
