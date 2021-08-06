@@ -136,6 +136,17 @@ Write-Host "------------------------------------" -ForegroundColor Green
 dotnet tool install --global dotnet-ef
 dotnet tool update --global dotnet-ef
 
+Write-Host "Enabling Chinese input method..." -ForegroundColor Yellow
+$LanguageList = Get-WinUserLanguageList
+$LanguageList.Add("zh-CN")
+Set-WinUserLanguageList $LanguageList -Force
+
+Write-Host "Installing Github.com/microsoft/artifacts-credprovider..." -ForegroundColor Green
+iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/microsoft/artifacts-credprovider/master/helpers/installcredprovider.ps1'))
+
+Write-Host "Removing Bluetooth icons..." -ForegroundColor Green
+cmd.exe /c "reg add `"HKCU\Control Panel\Bluetooth`" /v `"Notification Area Icon`" /t REG_DWORD /d 0 /f"
+
 Write-Host "------------------------------------" -ForegroundColor Green
 Read-Host -Prompt "Setup is done, restart is needed, press [ENTER] to restart computer."
 Restart-Computer
