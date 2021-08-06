@@ -50,6 +50,14 @@ foreach ($uwp in $uwpRubbishApps) {
 }
 # -----------------------------------------------------------------------------
 Write-Host ""
+Write-Host "Starting UWP apps to upgrade..." -ForegroundColor Green
+Write-Host "------------------------------------" -ForegroundColor Green
+$namespaceName = "root\cimv2\mdm\dmmap"
+$className = "MDM_EnterpriseModernAppManagement_AppManagement01"
+$wmiObj = Get-WmiObject -Namespace $namespaceName -Class $className
+$result = $wmiObj.UpdateScanMethod()
+# -----------------------------------------------------------------------------
+Write-Host ""
 Write-Host "Installing IIS..." -ForegroundColor Green
 Write-Host "------------------------------------" -ForegroundColor Green
 Enable-WindowsOptionalFeature -Online -FeatureName IIS-DefaultDocument -All
@@ -137,16 +145,28 @@ dotnet tool install --global dotnet-ef
 dotnet tool update --global dotnet-ef
 
 Write-Host "Enabling Chinese input method..." -ForegroundColor Yellow
+Write-Host "------------------------------------" -ForegroundColor Green
 $LanguageList = Get-WinUserLanguageList
 $LanguageList.Add("zh-CN")
 Set-WinUserLanguageList $LanguageList -Force
 
 Write-Host "Installing Github.com/microsoft/artifacts-credprovider..." -ForegroundColor Green
+Write-Host "------------------------------------" -ForegroundColor Green
 iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/microsoft/artifacts-credprovider/master/helpers/installcredprovider.ps1'))
 
 Write-Host "Removing Bluetooth icons..." -ForegroundColor Green
+Write-Host "------------------------------------" -ForegroundColor Green
 cmd.exe /c "reg add `"HKCU\Control Panel\Bluetooth`" /v `"Notification Area Icon`" /t REG_DWORD /d 0 /f"
 
+# -----------------------------------------------------------------------------
+Write-Host ""
+Write-Host "Checking Windows updates..." -ForegroundColor Green
+Write-Host "------------------------------------" -ForegroundColor Green
+Install-Module -Name PSWindowsUpdate -Force
+Write-Host "Installing updates... (Computer will reboot in minutes...)" -ForegroundColor Green
+Get-WindowsUpdate -AcceptAll -Install -ForceInstall -AutoReboot
+
+# -----------------------------------------------------------------------------
 Write-Host "------------------------------------" -ForegroundColor Green
 Read-Host -Prompt "Setup is done, restart is needed, press [ENTER] to restart computer."
 Restart-Computer
