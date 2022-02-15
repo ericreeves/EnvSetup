@@ -154,6 +154,11 @@ Set-TimeZone -Name "China Standard Time"
 
 Write-Host "Excluding repos from Windows Defender..." -ForegroundColor Green
 Add-MpPreference -ExclusionPath "$env:USERPROFILE\source\repos"
+Add-MpPreference -ExclusionPath "$env:USERPROFILE\.nuget"
+Add-MpPreference -ExclusionPath "$env:USERPROFILE\.vscode"
+Add-MpPreference -ExclusionPath "$env:USERPROFILE\.dotnet"
+Add-MpPreference -ExclusionPath "$env:USERPROFILE\.ssh"
+Add-MpPreference -ExclusionPath "$env:APPDATA\npm"
 
 Write-Host "Installing Github.com/microsoft/artifacts-credprovider..." -ForegroundColor Green
 Write-Host "------------------------------------" -ForegroundColor Green
