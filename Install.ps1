@@ -152,6 +152,9 @@ cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Adva
 Write-Host "Setting Time zone..." -ForegroundColor Green
 Set-TimeZone -Name "China Standard Time"
 
+Write-Host "Excluding repos from Windows Defender..." -ForegroundColor Green
+Add-MpPreference -ExclusionPath "$env:USERPROFILE\source\repos"
+
 Write-Host "Installing Github.com/microsoft/artifacts-credprovider..." -ForegroundColor Green
 Write-Host "------------------------------------" -ForegroundColor Green
 iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/microsoft/artifacts-credprovider/master/helpers/installcredprovider.ps1'))
