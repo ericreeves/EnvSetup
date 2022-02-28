@@ -160,6 +160,9 @@ Add-MpPreference -ExclusionPath "$env:USERPROFILE\.dotnet"
 Add-MpPreference -ExclusionPath "$env:USERPROFILE\.ssh"
 Add-MpPreference -ExclusionPath "$env:APPDATA\npm"
 
+Write-Host "Enabling Hardware-Accelerated GPU Scheduling..." -ForegroundColor Green
+New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\" -Name 'HwSchMode' -Value '2' -PropertyType DWORD -Force
+
 Write-Host "Installing Github.com/microsoft/artifacts-credprovider..." -ForegroundColor Green
 Write-Host "------------------------------------" -ForegroundColor Green
 iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/microsoft/artifacts-credprovider/master/helpers/installcredprovider.ps1'))
