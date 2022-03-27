@@ -14,7 +14,7 @@ This is the script for Edi Wang to setup a new dev box. You can modify the scrip
 Open Windows PowerShell(Admin)
 
 ```powershell
-iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/EdiWang/EnvSetup/master/Install.ps1'))
+iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/ericreeves/EnvSetup/master/Install.ps1'))
 ```
 ### Optional
 
